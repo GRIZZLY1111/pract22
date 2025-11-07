@@ -5,20 +5,26 @@
     android:layout_height="match_parent"
     android:padding="16dp"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@color/black">
 
     <EditText
         android:id="@+id/city1"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:hint="Введите город"
-        android:inputType="text"/>
+        android:inputType="text"
+        android:textColor="@color/white"
+        android:background="@drawable/goldbutton"/>
 
     <Button
+        android:layout_marginTop="10dp"
         android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Получить погоду"/>
+        android:text="Получить погоду"
+        android:textColor="@color/white"
+        android:background="@drawable/goldbutton"/>
 
     <TextView
         android:id="@+id/result"
@@ -27,6 +33,7 @@
         android:layout_marginTop="16dp"
         android:textSize="18dp"
         android:text="Результат:"
+        android:textColor="@color/red"
         />
 
 </LinearLayout>

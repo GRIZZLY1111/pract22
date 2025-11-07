@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
     }fun getResult(city: String){
         if(city.isNotEmpty() && city != null){
             var key="309444ae447b73b17e2a35d523d8d83c"
-            var url="https://api.openweathermap.org/data/2.5/weather?q="+city+"&appid="+key+"&units=metric&lang=ru"
+            var url="https://api.openweathermap.org/data/2.5/weather?q=$city&appid=$key&units=metric&lang=ru"
             val queue = Volley.newRequestQueue(this)
             val stringRequest = StringRequest(
                 Request.Method.GET,
@@ -38,11 +38,23 @@ class MainActivity : AppCompatActivity() {
                 {
                         response->
                     val obj = JSONObject(response)
-                    val temp = obj.getJSONObject("main")
-                    Log.d("Logcat", "Response: ${temp.getString("temp")}")
+                    val main = obj.getJSONObject("main")
+                    val temp = main.getString("temp")
+                    val humidity = main.getString("humidity")
+                    val cityru = obj.getString("name")
+                    val info = """
+                        Погода в городе: $cityru
+                        
+                        Температура: ${temp}°C
+                        
+                        Влажность: ${humidity}%
+                    """.trimIndent()
+                    text.text=info.toString()
+                    Log.d("MyLog", "Response: ${main.getString("temp")}")
                 },
                 {
-                    Log.d("Logcat", "Volley error: $it")
+                    text.text="Введеный вами город не найден"
+                    Log.d("MyLog", "Volley error: $it")
                 }
             )
             queue.add(stringRequest)
